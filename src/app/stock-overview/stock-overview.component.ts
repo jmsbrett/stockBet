@@ -19,7 +19,8 @@ export class StockOverviewComponent implements OnInit {
   getFaveStocks() {
     return JSON.stringify(this.faveStocks);
   }
-  
+
+
   @Input('addedStock')
   set addedStock(selectedStock: any) {
     console.log('addedStock : ' + JSON.stringify(selectedStock));
@@ -32,6 +33,5 @@ export class StockOverviewComponent implements OnInit {
       }
     }
   }
-
 
 }

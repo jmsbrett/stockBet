@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-stock-card',
@@ -11,5 +11,14 @@ export class StockCardComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  @Input() title : string = "Default Title";
+  @Input() companyName : string = "<No Company Name>";
+
+  imageUrl = '';
+  @Input()
+    set imgUrl(imageUrl : string){
+      this.imageUrl = imageUrl;
+    }
 
 }
