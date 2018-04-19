@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-stock-card',
@@ -7,18 +7,35 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class StockCardComponent implements OnInit {
 
+  imageUrl = '';
+
+  @Input() title: string = 'Default';
+  @Input() companyName: string = '<Company Name Not Provided>';
+  @Input()
+  set imgUrl(imageUrl: string) {
+    console.log('imageUrl ' + imageUrl);
+    this.imageUrl = imageUrl || 'https://i1.wp.com/tutorialsdojo.com/wp-content/uploads/2016/12/angular2_tutorialsdojo.jpg';
+  }
+ 
+  get imgUrl(): string { return this.imageUrl; }
+
+  @Output() addToList = new EventEmitter<any>();
+
+  background_color = 'white';
+  selected: boolean = false;
+  buttonLabel = 'Bet';
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  @Input() title : string = "Default Title";
-  @Input() companyName : string = "<No Company Name>";
-
-  imageUrl = '';
-  @Input()
-    set imgUrl(imageUrl : string){
-      this.imageUrl = imageUrl;
-    }
+  selectCard(){
+    this.selected = !this.selected;
+    this.background_color = this.selected ? 'lightgreen' : 'white';
+    console.log('this.title : ' + this.title);
+    this.buttonLabel = this.selected ? 'Remove Bet' : 'Bet';
+    this.addToList.emit({title: this.title, selected: this.selected});
+  }
 
 }
